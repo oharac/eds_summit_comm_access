@@ -15,7 +15,7 @@ library(maps)
 library(dplyr)
 library(viridis)
 library(wesanderson)
-pal <- wes_palette("Zissou1", 100, type = "continuous")
+library(RColorBrewer)
 
 
 ```
@@ -23,15 +23,17 @@ pal <- wes_palette("Zissou1", 100, type = "continuous")
 
 
 ```{r }
-dat<-read.csv("~/Dropbox/EDS_2024/tool_use/NRI_Table_CensusTracts/NRI_Table_CensusTracts.csv")
+dat<-read.csv("~/Dropbox/EDS_2024/eds_summit_comm_access/NRI_Table_CensusTracts_Mississippi/NRI_Table_CensusTracts_Mississippi.csv")
 
 names(dat)[names(dat) == 'STCOFIPS'] <- 'fips'
-
-plot_usmap(data = dat, values = "RISK_SCORE") + 
-  scale_fill_viridis(name = "Population", label = scales::comma) + 
+pal <- wes_palette("Zissou1", 100, type = "continuous")
+plot_usmap(data = dat, values = "RISK_SCORE", include=c("MS")) + 
+  scale_fill_gradientn(colours = pal,name = "Population", label = scales::comma) + 
   labs(title = "FEMA RISK") +
   theme(legend.position = "right")
 
+
+hist(dat$RISK_SCORE)
 
 ```
 
