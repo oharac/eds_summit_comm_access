@@ -41,4 +41,13 @@ df
 df |>
     ggplot() +
     geom_sf(aes(fill = estimate)) +
-    theme_void()
+    theme_void() +
+    theme(legend.position = 'bottom') +
+    guides(fill = guide_colorbar(
+        title = "Total population",
+        title.position = "top",
+        direction = "horizontal", 
+        position = "bottom", 
+        barwidth = 20, 
+        barheight = 1
+    ))
