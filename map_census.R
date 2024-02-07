@@ -38,9 +38,12 @@ df
 
 
 ## make a mpa of the census variable
+library(scico) # color scales
+
 df |>
     ggplot() +
-    geom_sf(aes(fill = estimate)) +
+    geom_sf(aes(fill = estimate), 
+            color = NA) +
     theme_void() +
     theme(legend.position = 'bottom') +
     guides(fill = guide_colorbar(
@@ -50,4 +53,5 @@ df |>
         position = "bottom", 
         barwidth = 20, 
         barheight = 1
-    ))
+    )) +
+    scale_fill_scico(palette ='bilbao')
