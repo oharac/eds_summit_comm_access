@@ -28,12 +28,26 @@ dat<-read.csv("~/Dropbox/EDS_2024/eds_summit_comm_access/NRI_Table_CensusTracts_
 names(dat)[names(dat) == 'STCOFIPS'] <- 'fips'
 pal <- wes_palette("Zissou1", 100, type = "continuous")
 plot_usmap(data = dat, values = "RISK_SCORE", include=c("MS")) + 
-  scale_fill_gradientn(colours = pal,name = "Population", label = scales::comma) + 
+  scale_fill_gradientn(colours = pal,name = "Risk", label = scales::comma) + 
   labs(title = "FEMA RISK") +
   theme(legend.position = "right")
 
-
 hist(dat$RISK_SCORE)
+
+nation<-read.csv("~/Dropbox/EDS_2024/NRI_Table_CensusTracts/NRI_Table_CensusTracts.csv")
+names(nation)[names(nation) == 'STCOFIPS'] <- 'fips'
+
+plot_usmap(data = nation, values = "RISK_SCORE") + 
+  scale_fill_gradientn(colours = pal,name = "Risk", label = scales::comma) + 
+  labs(title = "FEMA RISK") +
+  theme(legend.position = "right")
+
+gtrends<-read.csv("~/Dropbox/EDS_2024/eds_summit_comm_access/data/gTrends/gTrendMS.csv")
+
+ggplot(gtrends, 
+       aes(x = FEMA, y = Toolkit))+
+  geom_point()+theme_classic()
+
 
 ```
 
